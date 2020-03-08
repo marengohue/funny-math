@@ -18,16 +18,18 @@ describe("Funny math", () => {
         expect(result).to.deep.equal([3, 3, 5]);
     })
 
-    it("Should pass a random test", () => {
-        const n = 5;
-        const expectedOutput = _.times(n, () => _.random(1, 500, false))
-        const allPairs = (_ as any).combinations(expectedOutput, 2) as number[][];
-        const inputs = _.chain(allPairs)
-            .map(_.sum)
-            .sort()
-            .value();
-        const actualResult = solve(n, inputs);
-        const sortedResult = _.sortBy(actualResult, _.identity)
-        expect(sortedResult).to.deep.equal(expectedOutput);
+    it("Should pass a random test several times", () => {
+        _.times(10, () => {
+            const n = _.random(5, 10);
+            const expectedOutput = _.times(n, () => _.random(1, 500, false))
+            const allPairs = (_ as any).combinations(expectedOutput, 2) as number[][];
+            const inputs = _.chain(allPairs)
+                .map(_.sum)
+                .sort()
+                .value();
+            const actualResult = solve(n, inputs);
+            const sortedResult = _.sortBy(actualResult, _.identity)
+            expect(sortedResult).to.deep.equal(expectedOutput);
+        });
     });
 });
