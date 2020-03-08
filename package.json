@@ -8,8 +8,11 @@
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.2.10",
+    "@types/lodash": "^4.14.149",
     "@types/mocha": "^7.0.2",
     "chai": "^4.2.0",
+    "lodash": "^4.17.15",
+    "lodash.combinations": "^18.9.19",
     "mocha": "^7.1.0",
     "parcel": "^1.12.4",
     "ts-node": "^8.6.2",

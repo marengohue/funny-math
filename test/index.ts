@@ -1,5 +1,7 @@
 import { expect } from "chai";
 import solve from "../src/index";
+import "lodash.combinations";
+import * as _ from "lodash";
 
 describe("Funny math", () => {
     it("Should have a solve() function", () => {
@@ -14,5 +16,18 @@ describe("Funny math", () => {
     it("Should pass sample test 2", () => {
         const result = solve(3, [6, 6, 6, 6, 8, 8, 8, 10]);
         expect(result).to.deep.equal([3, 3, 5]);
+    })
+
+    it("Should pass a random test", () => {
+        const n = 5;
+        const expectedOutput = _.times(n, () => _.random(1, 500, false))
+        const allPairs = (_ as any).combinations(expectedOutput, 2) as number[][];
+        const inputs = _.chain(allPairs)
+            .map(_.sum)
+            .sort()
+            .value();
+        const actualResult = solve(n, inputs);
+        const sortedResult = _.sortBy(actualResult, _.identity)
+        expect(sortedResult).to.deep.equal(expectedOutput);
     });
 });
