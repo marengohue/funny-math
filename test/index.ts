@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import solve from "../src/index";
-import "lodash.combinations";
 import * as _ from "lodash";
 
 function* makePairIterator(inputs: number[]) {
@@ -29,11 +28,10 @@ describe("Funny math", () => {
     it("Should pass a random test several times", () => {
         _.times(10, () => {
             const n = _.random(5, 10);
-            const expectedOutput = _.times(n, () => _.random(1, 500, false));
+            const expectedOutput = _.sortBy(_.times(n, () => _.random(1, 500, false)), _.identity);
             const allPairs = Array.from(makePairIterator(expectedOutput));
-            const inputs = _.chain(allPairs).map(_.sum).value().sort();
-            const actualResult = solve(n, inputs);
-            const sortedResult = _.sortBy(actualResult, _.identity);
+            const inputs = _.chain(allPairs).map(_.sum).sortBy(_.identity).value();
+            const sortedResult = _.chain(solve(n, inputs)).sortBy(_.identity).value();
             expect(sortedResult).to.deep.equal(expectedOutput);
         });
     });
